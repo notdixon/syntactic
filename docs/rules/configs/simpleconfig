@@ -1,0 +1,28 @@
+# vim: filetype=sh
+#                  _             _   _      
+#  ___ _   _ _ __ | |_ __ _  ___| |_(_) ___ 
+# / __| | | | '_ \| __/ _` |/ __| __| |/ __|
+# \__ \ |_| | | | | || (_| | (__| |_| | (__ 
+# |___/\__, |_| |_|\__\__,_|\___|\__|_|\___|
+#      |___/   v0.1 Example Config File
+#
+# This is an example configuration file, currently there aren't many options, but
+# the options that you can change are either 'true' or 'false' (case sensitive)
+
+# Check for included files existing
+set checkIncludes false
+
+# Check the comments:
+#   Check for /* Multi line comments on 1 line */
+#             /* Bad formatting
+#              * of Comments */
+set checkComments false
+
+# Check for unnecessary braces:
+#   ie. on single operation if/else statements:
+#	if (x) {
+#		return 1;
+#	}
+#
+# Braces are not required
+set checkBraces true

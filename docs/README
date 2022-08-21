@@ -1,0 +1,79 @@
+                   ==========================================
+                                    _             _   _      
+                    ___ _   _ _ __ | |_ __ _  ___| |_(_) ___ 
+                   / __| | | | '_ \| __/ _` |/ __| __| |/ __|
+                   \__ \ |_| | | | | || (_| | (__| |_| | (__ 
+                   |___/\__, |_| |_|\__\__,_|\___|\__|_|\___|
+                        |___/  The Rust Syntax Checker
+        
+                   ==========================================
+
+
++- Contents -----------------+
+| * What is Syntactic?       |
+| * Config File              |
+| * Building Syntactic       |
+| * LICENSE                  |
++----------------------------+
+
+
+* What is Syntactic?
+
+Syntactic is a tool written in Rust, designed to make it easy to make sure that
+your code is consistent.
+
+Syntactic has default "rules" that it follows, and these can be adjusted by
+using a configuration file (see the 'Config File' section). Currently the only
+programming language that is supported is C, and supports the basic things that
+you would want to be consistent - ie. braces, comments.
+
+* Config File
+Syntactic's rules can be adjusted by the use of a configuration file. This can
+be specified with either the `--conf` or `-c` flag, and an example of a simple,
+fairly commented, config file can be found in `docs/rules/configs`
+
+The name of the config file doesn't matter, as it's specified with a flag, and
+Syntactic doesn't search out a config file, and so it can't interfere with the
+XDG Base Directory (programs that don't respect that make $HOME look messy)
+
+By default, all rules are 'true'. And rules can be set to either 'true' or
+'false' (case sensitive)
+
+Lets say that you want to stop checking if files included via `#include
+<file.h>` actually do exist, then you can simply add this to your config file:
+
+	set checkIncludes false
+
+And then you can use that config like this:
+
+	syntactic --conf stop_includes --file <source>
+
+The example config file in `docs/rules/configs` shows all available rules.
+
+* Building Syntactic
+To build Syntactic, you need to have Rust installed. On Arch and Arch-Based
+Distributions, you can install it with the following command
+
+	sudo pacman -Sy cargo
+
+Then you can simply run
+
+	cargo build
+
+* LICENSE
+
+Copyright (C) 2022  notdixon <notdixon@gmx.com>
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
