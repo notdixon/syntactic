@@ -27,31 +27,19 @@ pub fn checkSyntax(file: &str, configGiven: bool, configFile: &str) {
         for line in lines.iter() {
     
             /* Check Includes */
-            if line.contains("set checkIncludes") || line.contains("set check_includes") {
-                let optionValue = line.replace("set checkIncludes", "").replace("set check_includes", "");
-
-                if optionValue.contains("false") {
-                    println!("CONF\t{} Turned checking for includes {}", format!("[INFO] ").green().bold(), format!("OFF").red().bold());
-                    checkIncludes = false;
-                }
+            if line.contains("set checkIncludes") || line.contains("set check_includes") && line.contains("false") {
+                println!("CONF\t{} Turned checking for includes {}", format!("[INFO] ").green().bold(), format!("OFF").red().bold());
+                checkIncludes = false;
             }
 
-            if line.contains("set checkComments") || line.contains("set check_comments") {
-                let optionValue = line.replace("set checkComments", "").replace("set check_comments", "");
-
-                if optionValue.contains("false") {
-                    println!("CONF\t{} Turned checking comment sanity {}", format!("[INFO] ").green().bold(), format!("OFF").red().bold());
-                    checkComments = false;
-                }
+            if line.contains("set checkComments") || line.contains("set check_comments") && line.contains("false") {
+                println!("CONF\t{} Turned checking comment sanity {}", format!("[INFO] ").green().bold(), format!("OFF").red().bold());
+                checkComments = false;
             }
 
-            if line.contains("set checkBraces") || line.contains("set check_braces") {
-                let optionValue = line.replace("set checkBraces", "").replace("set check_braces", "");
-
-                if optionValue.contains("false") {
-                    println!("CONF\t{} Turned checking for unnecessary braces {}", format!("[INFO] ").green().bold(), format!("OFF").red().bold());
-                    checkBraces = false;
-                }
+            if line.contains("set checkBraces") || line.contains("set check_braces") && line.contains("false") {
+                println!("CONF\t{} Turned checking for unnecessary braces {}", format!("[INFO] ").green().bold(), format!("OFF").red().bold());
+                checkBraces = false;
             }
         }
     }
