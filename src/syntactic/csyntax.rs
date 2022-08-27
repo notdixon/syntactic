@@ -65,6 +65,32 @@ pub fn checkSyntax(file: &str, configGiven: bool, configFile: &str) {
                     println!("L{}\t{} Don't include *.c Files - Include *.h Files", i, format!("[WARN] ").bold().yellow());
                     warnings += 1;
                 }
+
+                let includedLocalFile = line.replace("#include ", "").replace("\"", "");
+                let split = file.split("/");
+                let fileNameElements: Vec<&str> = split.collect();
+                
+                let mut includedFilePath: String = "".to_owned();
+                let mut y = 0;
+
+                for fileElement in fileNameElements.iter() {
+                    if fileElement.contains(".c") {
+                        break;
+                    } else {
+                        includedFilePath.push_str(fileElement);
+                        includedFilePath.push_str("/");
+                        y += y + 1;
+                    }
+                }
+
+                includedFilePath.push_str(&includedLocalFile);
+                
+                let includeLocalPath = Path::new(&includedFilePath);
+    
+                if !includeLocalPath.exists() {
+                    println!("L{}\t{} Locally included file {} doesn't exist", i, format!("[ERROR]").bold().red(), format!("{}", &includedLocalFile).green().bold());
+                    errors += 1;
+                }
             }
         }
 
